@@ -6,17 +6,17 @@ server.use(express.json());
 
 const classes = [
   {
-    id:1,
+    id: 1,
     name: "mindx 1",
     members: 50,
   },
   {
-    id:2,
+    id: 2,
     name: "mindx 2",
     members: 10,
   },
   {
-    id:3,
+    id: 3,
     name: "mindx 3",
     members: 20,
   },
@@ -33,11 +33,16 @@ server.get("/home", (request, response) => {
   response.status(200).send({ name: "mindx" });
 });
 
-server.put("/classes/:id",(req,res)=>{
-      console.log("Param",req.params);
-      console.log("body",req.body);
-});
 
+server.post("/classes",(req,res) => {
+    res.status(201).send(classes)
+})
+
+server.put("/classes/:id", (req, res) => {
+  console.log("params", req.params);
+  console.log("body", req.body);
+  res.status(204).send(classes);
+});
 
 //Request: method - POST, đường dẫn :/users
 //Respond: status - 201, data là 1 object user bao gồm tên và tuổi.
@@ -52,11 +57,10 @@ server.post("/users", (request, response) => {
 server.get("/classes", (req, res) => {
   const query = req.query;
   // console.log("query",query);
-  if(query.memberOver40)
-  {
-    const over40 = classes.filter((item)=>item.members > 40);
-    res.status(200).send(over40)
-  }else{
+  if (query.memberOver40) {
+    const over40 = classes.filter((item) => item.members > 40);
+    res.status(200).send(over40);
+  } else {
     res.status(200).send(classes);
   }
 });
