@@ -1,4 +1,4 @@
-import express, { request, response } from "express";
+import express from "express";
 
 const server = express();
 
@@ -41,7 +41,9 @@ server.post("/classes",(req,res) => {
 server.put("/classes/:id", (req, res) => {
   console.log("params", req.params);
   console.log("body", req.body);
-  res.status(204).send(classes);
+  let index = classes.findIndex((item) => item.id === Number(req.params.id));
+  classes[index] = req.body;
+  res.status(200).send(classes);
 });
 
 //Request: method - POST, đường dẫn :/users
