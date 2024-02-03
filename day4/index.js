@@ -3,12 +3,10 @@ import mongoose from 'mongoose';
 
 async function connectDb(){
 
-    await mongoose.connect('mongodb://127.0.0.1/my_database');
+    await mongoose.connect('mongodb://localhost/fullstack');
 
 
 }
-
-
 
 const server = express()
 
